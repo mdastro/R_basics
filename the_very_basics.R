@@ -12,8 +12,7 @@ peso <- c(75,60,75,80)
 sexo <- c(1,2,2,1)
 sexo <- factor(sexo, levels = c(1,2), label=c("Masculino", "Feminino")
 dados <- data.frame(peso=peso, sexo=sexo)
-
-# outout:
+dados
 #   peso sexo
 # 1   75    1
 # 2   60    2
@@ -21,7 +20,6 @@ dados <- data.frame(peso=peso, sexo=sexo)
 # 4   80    1
 
 summary(dados)
-# Output:
 #       peso            sexo    
 # Min.   :60.00   Min.   :1.0  
 # 1st Qu.:71.25   1st Qu.:1.0  
@@ -38,6 +36,12 @@ ncol(dados)
 # [1] 2
 names(dados)
 # [1] "peso" "sexo"
+
+subset(dados, peso<=75)
+#   peso sexo
+# 1   75    1
+# 2   60    2
+# 3   75    2
 
 
 # Read Header
