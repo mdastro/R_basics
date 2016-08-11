@@ -20,6 +20,25 @@ dados <- data.frame(peso=peso, sexo=sexo)
 # 3   75    2
 # 4   80    1
 
+summary(dados)
+# Output:
+#       peso            sexo    
+# Min.   :60.00   Min.   :1.0  
+# 1st Qu.:71.25   1st Qu.:1.0  
+# Median :75.00   Median :1.5  
+# Mean   :72.50   Mean   :1.5  
+# 3rd Qu.:76.25   3rd Qu.:2.0  
+# Max.   :80.00   Max.   :2.0
+
+dim(dados)
+# [1] 4 2
+nrow(dados)
+# [1] 4
+ncol(dados)
+# [1] 2
+names(dados)
+# [1] "peso" "sexo"
+
 
 # Read Header
 head(data)
