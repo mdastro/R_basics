@@ -1,0 +1,77 @@
+<!-- R Commander Markdown Template -->
+
+Replace with Main Title
+=======================
+
+### Your Name
+
+### `r as.character(Sys.Date())`
+
+```{r echo=FALSE}
+# include this code chunk as-is to set options
+knitr::opts_chunk$set(comment=NA, prompt=TRUE, out.width=750, fig.height=8, fig.width=8)
+library(Rcmdr)
+library(car)
+library(RcmdrMisc)
+```
+
+```{r}
+Bicarello <- read.table("/home/mae5755.16/Downloads/Bricarello2002.csv", header=TRUE, sep=",", na.strings="NA", dec=".", 
+  strip.white=TRUE)
+```
+
+```{r}
+Bicarello2002 <- read.table("/home/mae5755.16/Downloads/Bricarello2002.csv", header=TRUE, sep="", na.strings="NA", dec=".", strip.white=TRUE)
+```
+
+```{r}
+Bicarello2002 <- read.table("/home/mae5755.16/Downloads/Bricarello2002.csv", header=TRUE, sep="", na.strings="NA", dec=".", strip.white=TRUE)
+```
+
+```{r}
+Bicarello2002
+```
+
+```{r}
+Bicarello2002 <- read.table("/home/mae5755.16/Downloads/Bricarello2002.csv", header=TRUE, sep=",", na.strings="NA", dec=".", strip.white=TRUE)
+```
+
+```{r}
+Bicarello2002
+```
+
+```{r}
+summary(Bicarello2002)
+```
+
+```{r}
+Bicarello2002 <- within(Bicarello2002, {
+  Grupo <- factor(Grupo, labels=c('G1','G2'))
+})
+```
+
+```{r}
+Bicarello2002 <- within(Bicarello2002, {Grupo <- factor(Grupo, labels=c('G1','G2'))})
+```
+
+```{r}
+summary(Bicarello2002)
+```
+
+```{r}
+with(Bicarello2002, Hist(Col_HDL_basal, scale="frequency", breaks="Sturges", col="darkgray"))
+```
+
+```{r}
+with(Bicarello2002, Hist(Col_HDL_basal, groups=Grupo, scale="frequency", breaks="Sturges", col="darkgray"))
+```
+
+```{r}
+with(Bicarello2002, Hist(Col_HDL_soja, groups=Grupo, scale="frequency", breaks="Sturges", col="darkgray"))
+```
+
+```{r}
+Boxplot( ~ Col_placebo, data=Bicarello2002, id.method="y")
+```
+
+
