@@ -1,77 +1,98 @@
-<!-- R Commander Markdown Template -->
 
-Replace with Main Title
-=======================
-
-### Your Name
-
-### `r as.character(Sys.Date())`
-
-```{r echo=FALSE}
-# include this code chunk as-is to set options
-knitr::opts_chunk$set(comment=NA, prompt=TRUE, out.width=750, fig.height=8, fig.width=8)
-library(Rcmdr)
-library(car)
-library(RcmdrMisc)
-```
 
 ```{r}
-Bicarello <- read.table("/home/mae5755.16/Downloads/Bricarello2002.csv", header=TRUE, sep=",", na.strings="NA", dec=".", 
-  strip.white=TRUE)
+dados <- read.table("/home/mae5755.16/Downloads/dados_simulados.csv", header=TRUE, sep=",", na.strings="NA", 
+  dec=".", strip.white=TRUE)
 ```
 
-```{r}
-Bicarello2002 <- read.table("/home/mae5755.16/Downloads/Bricarello2002.csv", header=TRUE, sep="", na.strings="NA", dec=".", strip.white=TRUE)
-```
 
 ```{r}
-Bicarello2002 <- read.table("/home/mae5755.16/Downloads/Bricarello2002.csv", header=TRUE, sep="", na.strings="NA", dec=".", strip.white=TRUE)
+# dados em 
 ```
 
-```{r}
-Bicarello2002
-```
 
 ```{r}
-Bicarello2002 <- read.table("/home/mae5755.16/Downloads/Bricarello2002.csv", header=TRUE, sep=",", na.strings="NA", dec=".", strip.white=TRUE)
+print (dados)
 ```
 
-```{r}
-Bicarello2002
-```
 
 ```{r}
-summary(Bicarello2002)
+medias <- dados$mean
 ```
 
+
 ```{r}
-Bicarello2002 <- within(Bicarello2002, {
-  Grupo <- factor(Grupo, labels=c('G1','G2'))
+print (medias)
+```
+
+
+```{r}
+with(dados, Hist(mean, scale="frequency", breaks="Sturges", col="darkgray"))
+```
+
+
+```{r}
+summary(dados)
+```
+
+
+```{r}
+media_das_medias <- mean(medias)
+```
+
+
+```{r}
+media_das_medias
+```
+
+
+```{r}
+dados$confianca1 <- with(dados, mean-sd/4)
+```
+
+
+```{r}
+dados$confianca2 <- with(dados, mean+sd/4)
+```
+
+
+```{r}
+print (dados$confianca1, dados$confianca2)
+```
+
+
+```{r}
+dados <- within(dados, {
+  confianca1 <- NULL
+  confianca2<- NULL
+  mean <- NULL
+  sd <- NULL 
+})
+```
+
+
+```{r}
+dados <- within(dados, {
+  confianca2 <- NULL 
 })
 ```
 
 ```{r}
-Bicarello2002 <- within(Bicarello2002, {Grupo <- factor(Grupo, labels=c('G1','G2'))})
+dados2 <- as.data.frame(t(dados))
+```
+
+
+```{r}
+dados2 <- data.frame(t(dados))
 ```
 
 ```{r}
-summary(Bicarello2002)
+library('graphics')
 ```
 
-```{r}
-with(Bicarello2002, Hist(Col_HDL_basal, scale="frequency", breaks="Sturges", col="darkgray"))
-```
 
 ```{r}
-with(Bicarello2002, Hist(Col_HDL_basal, groups=Grupo, scale="frequency", breaks="Sturges", col="darkgray"))
-```
-
-```{r}
-with(Bicarello2002, Hist(Col_HDL_soja, groups=Grupo, scale="frequency", breaks="Sturges", col="darkgray"))
-```
-
-```{r}
-Boxplot( ~ Col_placebo, data=Bicarello2002, id.method="y")
+dados2 <- data.frame(t(dados))
 ```
 
 
