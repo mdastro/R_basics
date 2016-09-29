@@ -1,98 +1,42 @@
+<!-- R Commander Markdown Template -->
+
+Replace with Main Title
+=======================
+
+### Your Name
+
+### `r as.character(Sys.Date())`
+
+```{r echo=FALSE}
+# include this code chunk as-is to set options
+knitr::opts_chunk$set(comment=NA, prompt=TRUE, out.width=750, fig.height=8, fig.width=8)
+library(Rcmdr)
+library(car)
+library(RcmdrMisc)
+```
 
 
-```{r}
-dados <- read.table("/home/mae5755.16/Downloads/dados_simulados.csv", header=TRUE, sep=",", na.strings="NA", 
-  dec=".", strip.white=TRUE)
+```{r echo=FALSE}
+# include this code chunk as-is to enable 3D graphs
+library(rgl)
+knitr::knit_hooks$set(webgl = hook_webgl)
 ```
 
 
 ```{r}
-# dados em 
-```
-
-
-```{r}
-print (dados)
-```
-
-
-```{r}
-medias <- dados$mean
-```
-
-
-```{r}
-print (medias)
-```
-
-
-```{r}
-with(dados, Hist(mean, scale="frequency", breaks="Sturges", col="darkgray"))
-```
-
-
-```{r}
-summary(dados)
-```
-
-
-```{r}
-media_das_medias <- mean(medias)
-```
-
-
-```{r}
-media_das_medias
-```
-
-
-```{r}
-dados$confianca1 <- with(dados, mean-sd/4)
-```
-
-
-```{r}
-dados$confianca2 <- with(dados, mean+sd/4)
-```
-
-
-```{r}
-print (dados$confianca1, dados$confianca2)
-```
-
-
-```{r}
-dados <- within(dados, {
-  confianca1 <- NULL
-  confianca2<- NULL
-  mean <- NULL
-  sd <- NULL 
-})
-```
-
-
-```{r}
-dados <- within(dados, {
-  confianca2 <- NULL 
-})
+Dataset <- read.table("/home/mae5755.16/Downloads/dados.csv", header=TRUE, sep=",", na.strings="NA", dec=".", strip.white=TRUE)
 ```
 
 ```{r}
-dados2 <- as.data.frame(t(dados))
-```
-
-
-```{r}
-dados2 <- data.frame(t(dados))
+with(Dataset, (t.test(amostra1, alternative='two.sided', mu=4.0, conf.level=.95)))
 ```
 
 ```{r}
-library('graphics')
+with(Dataset, (t.test(amostra1, alternative='two.sided', mu=4.1, conf.level=.95)))
 ```
 
-
 ```{r}
-dados2 <- data.frame(t(dados))
+with(NormalSamples, (t.test(obs, alternative='two.sided', mu=4.0, conf.level=.95)))
 ```
 
 
