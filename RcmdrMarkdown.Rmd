@@ -1,98 +1,93 @@
+<!-- R Commander Markdown Template -->
+
+Replace with Main Title
+=======================
+
+### Your Name
+
+### `r as.character(Sys.Date())`
+
+```{r echo=FALSE}
+# include this code chunk as-is to set options
+knitr::opts_chunk$set(comment=NA, prompt=TRUE, out.width=750, fig.height=8, fig.width=8)
+library(Rcmdr)
+library(car)
+library(RcmdrMisc)
+```
 
 
-```{r}
-dados <- read.table("/home/mae5755.16/Downloads/dados_simulados.csv", header=TRUE, sep=",", na.strings="NA", 
-  dec=".", strip.white=TRUE)
+```{r echo=FALSE}
+# include this code chunk as-is to enable 3D graphs
+library(rgl)
+knitr::knit_hooks$set(webgl = hook_webgl)
 ```
 
 
 ```{r}
-# dados em 
+Dataset <- read.table("/home/mae5755.16/Downloads/tabela.csv", header=TRUE, sep=",", na.strings="NA", dec=".", strip.white=TRUE)
+```
+
+```{r}
+summary(Dataset)
 ```
 
 
 ```{r}
-print (dados)
+library(abind, pos=14)
 ```
 
 
 ```{r}
-medias <- dados$mean
+library(e1071, pos=15)
 ```
 
 
 ```{r}
-print (medias)
+numSummary(Dataset[,"concentracao"], groups=Dataset$local, statistics=c("mean", "sd", "IQR", "quantiles"), 
+  quantiles=c(0,.25,.5,.75,1))
+```
+
+```{r}
+Boxplot( ~ concentracao, data=Dataset, id.method="y")
+```
+
+```{r}
+Boxplot(concentracao~local, data=Dataset, id.method="y")
+```
+
+```{r}
+t.test(concentracao~local, alternative='two.sided', conf.level=.95, var.equal=FALSE, data=Dataset)
+```
+
+```{r}
+t.test(concentracao~local, alternative='two.sided', conf.level=.95, var.equal=TRUE, data=Dataset)
+```
+
+```{r}
+with(Dataset, qqPlot(concentracao, dist="norm", id.method="y", id.n=2, labels=rownames(Dataset)))
+```
+
+```{r}
+load("/home/mae5755.16/Downloads/a.csv")
 ```
 
 
 ```{r}
-with(dados, Hist(mean, scale="frequency", breaks="Sturges", col="darkgray"))
-```
-
-
-```{r}
-summary(dados)
-```
-
-
-```{r}
-media_das_medias <- mean(medias)
-```
-
-
-```{r}
-media_das_medias
-```
-
-
-```{r}
-dados$confianca1 <- with(dados, mean-sd/4)
-```
-
-
-```{r}
-dados$confianca2 <- with(dados, mean+sd/4)
-```
-
-
-```{r}
-print (dados$confianca1, dados$confianca2)
-```
-
-
-```{r}
-dados <- within(dados, {
-  confianca1 <- NULL
-  confianca2<- NULL
-  mean <- NULL
-  sd <- NULL 
-})
-```
-
-
-```{r}
-dados <- within(dados, {
-  confianca2 <- NULL 
-})
+grupo_a <- read.table("/home/mae5755.16/Downloads/a.csv", header=TRUE, sep=",", na.strings="NA", dec=".", 
+  strip.white=TRUE)
 ```
 
 ```{r}
-dados2 <- as.data.frame(t(dados))
-```
-
-
-```{r}
-dados2 <- data.frame(t(dados))
+grupo_b <- read.table("/home/mae5755.16/Downloads/b.csv", header=TRUE, sep=",", na.strings="NA", dec=".", 
+  strip.white=TRUE)
 ```
 
 ```{r}
-library('graphics')
+with(grupo_a, qqPlot(concentracao, dist="norm", id.method="y", id.n=2, labels=rownames(grupo_a)))
 ```
 
-
 ```{r}
-dados2 <- data.frame(t(dados))
+with(grupo_b, qqPlot(concentracao, dist="norm", id.method="y", id.n=2, labels=rownames(grupo_b)))
 ```
 
 
