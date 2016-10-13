@@ -1,98 +1,150 @@
+<!-- R Commander Markdown Template -->
 
+Replace with Main Title
+=======================
+
+### Your Name
+
+### `r as.character(Sys.Date())`
+
+```{r echo=FALSE}
+# include this code chunk as-is to set options
+knitr::opts_chunk$set(comment=NA, prompt=TRUE, out.width=750, fig.height=8, fig.width=8)
+library(Rcmdr)
+library(car)
+library(RcmdrMisc)
+```
+
+
+```{r echo=FALSE}
+# include this code chunk as-is to enable 3D graphs
+library(rgl)
+knitr::knit_hooks$set(webgl = hook_webgl)
+```
 
 ```{r}
-dados <- read.table("/home/mae5755.16/Downloads/dados_simulados.csv", header=TRUE, sep=",", na.strings="NA", 
-  dec=".", strip.white=TRUE)
+Dataset <- read.table("/home/mae5755.16/aula_13out2016.csv", header=TRUE, sep=",", na.strings="NA", dec=".", strip.white=TRUE)
+```
+
+```{r}
+summary(Dataset)
 ```
 
 
 ```{r}
-# dados em 
+summary(Dataset)
 ```
 
 
 ```{r}
-print (dados)
-```
-
-
-```{r}
-medias <- dados$mean
-```
-
-
-```{r}
-print (medias)
-```
-
-
-```{r}
-with(dados, Hist(mean, scale="frequency", breaks="Sturges", col="darkgray"))
-```
-
-
-```{r}
-summary(dados)
-```
-
-
-```{r}
-media_das_medias <- mean(medias)
-```
-
-
-```{r}
-media_das_medias
-```
-
-
-```{r}
-dados$confianca1 <- with(dados, mean-sd/4)
-```
-
-
-```{r}
-dados$confianca2 <- with(dados, mean+sd/4)
-```
-
-
-```{r}
-print (dados$confianca1, dados$confianca2)
-```
-
-
-```{r}
-dados <- within(dados, {
-  confianca1 <- NULL
-  confianca2<- NULL
-  mean <- NULL
-  sd <- NULL 
-})
-```
-
-
-```{r}
-dados <- within(dados, {
-  confianca2 <- NULL 
+local({
+  .Table <- with(Dataset, table(fator))
+  cat("\ncounts:\n")
+  print(.Table)
+  cat("\npercentages:\n")
+  print(round(100*.Table/sum(.Table), 2))
 })
 ```
 
 ```{r}
-dados2 <- as.data.frame(t(dados))
+local({
+  .Table <- with(Dataset, table(fator))
+  cat("\ncounts:\n")
+  print(.Table)
+  cat("\npercentages:\n")
+  print(round(100*.Table/sum(.Table), 2))
+})
+```
+
+```{r}
+with(Dataset, tapply(resposta, list(fator), mean, na.rm=TRUE))
+```
+
+```{r}
+with(Dataset, tapply(resposta, fator,  var, na.rm=TRUE))
+var.test(resposta ~ fator, alternative='two.sided', conf.level=.95, data=Dataset)
+```
+
+```{r}
+summary(Dataset)
 ```
 
 
 ```{r}
-dados2 <- data.frame(t(dados))
-```
-
-```{r}
-library('graphics')
+library(abind, pos=14)
 ```
 
 
 ```{r}
-dados2 <- data.frame(t(dados))
+library(e1071, pos=15)
+```
+
+
+```{r}
+numSummary(Dataset[,"resposta"], groups=Dataset$fator, statistics=c("mean", "sd", "se(mean)", "IQR", "quantiles"), 
+  quantiles=c(0,.25,.5,.75,1))
+```
+
+```{r}
+library(mvtnorm, pos=16)
+```
+
+
+```{r}
+library(survival, pos=16)
+```
+
+
+```{r}
+library(MASS, pos=16)
+```
+
+
+```{r}
+library(TH.data, pos=16)
+```
+
+
+```{r}
+library(multcomp, pos=16)
+```
+
+
+```{r}
+AnovaModel.1 <- aov(resposta ~ fator, data=Dataset)
+summary(AnovaModel.1)
+with(Dataset, numSummary(resposta, groups=fator, statistics=c("mean", "sd")))
+```
+
+```{r}
+Dataset <- read.table("/home/mae5755.16/aula_13out2016.csv", header=TRUE, sep=",", na.strings="NA", dec=".", 
+  strip.white=TRUE)
+```
+
+```{r}
+with(Dataset, tapply(resposta, list(fator), mean, na.rm=TRUE))
+```
+
+```{r}
+with(Dataset, tapply(resposta, list(fator), sd, na.rm=TRUE))
+```
+
+```{r}
+AnovaModel.2 <- aov(resposta ~ fator, data=Dataset)
+summary(AnovaModel.2)
+with(Dataset, numSummary(resposta, groups=fator, statistics=c("mean", "sd")))
+```
+
+```{r}
+t.test(resposta~fator, alternative='two.sided', conf.level=.95, var.equal=FALSE, data=Dataset)
+```
+
+```{r}
+t.test(resposta~fator, alternative='greater', conf.level=.95, var.equal=FALSE, data=Dataset)
+```
+
+```{r}
+t.test(resposta~fator, alternative='less', conf.level=.95, var.equal=FALSE, data=Dataset)
 ```
 
 
