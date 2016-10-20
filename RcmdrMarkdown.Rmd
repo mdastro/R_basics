@@ -1,98 +1,73 @@
 
 
 ```{r}
-dados <- read.table("/home/mae5755.16/Downloads/dados_simulados.csv", header=TRUE, sep=",", na.strings="NA", 
-  dec=".", strip.white=TRUE)
+load("/home/mae5755.16/Downloads/Crisantemo2.RData")
 ```
 
 
 ```{r}
-# dados em 
+load("/home/mae5755.16/Downloads/Crisantemo2(1).RData")
+```
+
+```{r}
+summary(Crisantemo)
 ```
 
 
 ```{r}
-print (dados)
+with(Crisantemo, tapply(Crescimento, list(Concentracao), mean, na.rm=TRUE))
+```
+
+```{r}
+AnovaModel.1 <- lm(Crescimento ~ Concentracao, data=Crisantemo, contrasts=list(Concentracao ="contr.Sum"))
+Anova(AnovaModel.1)
+with(Crisantemo, (tapply(Crescimento, list(Concentracao), mean, na.rm=TRUE))) # means
+with(Crisantemo, (tapply(Crescimento, list(Concentracao), sd, na.rm=TRUE))) # std. deviations
+xtabs(~ Concentracao, data=Crisantemo) # counts
+```
+
+```{r}
+library(mvtnorm, pos=14)
 ```
 
 
 ```{r}
-medias <- dados$mean
+library(survival, pos=14)
 ```
 
 
 ```{r}
-print (medias)
+library(MASS, pos=14)
 ```
 
 
 ```{r}
-with(dados, Hist(mean, scale="frequency", breaks="Sturges", col="darkgray"))
+library(TH.data, pos=14)
 ```
 
 
 ```{r}
-summary(dados)
+library(multcomp, pos=14)
 ```
 
 
 ```{r}
-media_das_medias <- mean(medias)
+library(abind, pos=19)
+```
+
+```{r}
+pairwise.t.test(Crisantemo$Crescimento, Crisantemo$Concentracao, p.adjust.method="bonferroni")
 ```
 
 
 ```{r}
-media_das_medias
-```
-
-
-```{r}
-dados$confianca1 <- with(dados, mean-sd/4)
-```
-
-
-```{r}
-dados$confianca2 <- with(dados, mean+sd/4)
-```
-
-
-```{r}
-print (dados$confianca1, dados$confianca2)
-```
-
-
-```{r}
-dados <- within(dados, {
-  confianca1 <- NULL
-  confianca2<- NULL
-  mean <- NULL
-  sd <- NULL 
-})
-```
-
-
-```{r}
-dados <- within(dados, {
-  confianca2 <- NULL 
-})
+with(Crisantemo, tapply(Crescimento, Concentracao, var, na.rm=TRUE))
+bartlett.test(Crescimento ~ Concentracao, data=Crisantemo)
 ```
 
 ```{r}
-dados2 <- as.data.frame(t(dados))
-```
-
-
-```{r}
-dados2 <- data.frame(t(dados))
-```
-
-```{r}
-library('graphics')
-```
-
-
-```{r}
-dados2 <- data.frame(t(dados))
+with(Crisantemo, tapply(Crescimento, Concentracao, var, na.rm=TRUE))
+leveneTest(Crescimento ~ Concentracao, data=Crisantemo, center="median")
 ```
 
 
