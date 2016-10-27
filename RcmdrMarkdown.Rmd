@@ -1,98 +1,232 @@
 
 
 ```{r}
-dados <- read.table("/home/mae5755.16/Downloads/dados_simulados.csv", header=TRUE, sep=",", na.strings="NA", 
-  dec=".", strip.white=TRUE)
+load("/home/mae5755.16/Downloads/aula11/EX1_dois_fatores.RData")
 ```
 
 
 ```{r}
-# dados em 
+load("/home/mae5755.16/Downloads/aula11/script_anova_dois_fatores.R")
+```
+
+```{r}
+load("/home/mae5755.16/Downloads/aula11/EX1_dois_fatores.RData")
 ```
 
 
 ```{r}
-print (dados)
+Dataset <- readXL("/home/mae5755.16/Downloads/aula11/Espirometria.xlsx", rownames=FALSE, header=TRUE, na="", 
+  sheet="Espirometria_curso", stringsAsFactors=TRUE)
+```
+
+```{r}
+Dataset <- within(Dataset, {
+  exposicao <- as.factor(exposicao)
+})
+```
+
+```{r}
+with(Dataset, tapply(cvfpred, exposicao, median, na.rm=TRUE))
+kruskal.test(cvfpred ~ exposicao, data=Dataset)
+```
+
+```{r}
+library(mvtnorm, pos=14)
 ```
 
 
 ```{r}
-medias <- dados$mean
+library(survival, pos=14)
 ```
 
 
 ```{r}
-print (medias)
+library(MASS, pos=14)
 ```
 
 
 ```{r}
-with(dados, Hist(mean, scale="frequency", breaks="Sturges", col="darkgray"))
+library(TH.data, pos=14)
 ```
 
 
 ```{r}
-summary(dados)
+library(multcomp, pos=14)
 ```
 
 
 ```{r}
-media_das_medias <- mean(medias)
+library(abind, pos=19)
 ```
 
 
 ```{r}
-media_das_medias
+AnovaModel.1 <- aov(temtraba ~ exposicao, data=Dataset)
+summary(AnovaModel.1)
+with(Dataset, numSummary(temtraba, groups=exposicao, statistics=c("mean", "sd")))
+```
+
+```{r}
+with(Dataset, tapply(temtraba, exposicao, median, na.rm=TRUE))
+kruskal.test(temtraba ~ exposicao, data=Dataset)
+```
+
+```{r}
+load("/home/mae5755.16/Downloads/aula11/PulsacaoUCLAD1.RData")
+```
+
+```{r}
+Dataset <- readXL("/home/mae5755.16/Downloads/aula11/Espirometria.xlsx", rownames=FALSE, header=TRUE, na="", 
+  sheet="Espirometria_curso", stringsAsFactors=TRUE)
 ```
 
 
 ```{r}
-dados$confianca1 <- with(dados, mean-sd/4)
-```
-
-
-```{r}
-dados$confianca2 <- with(dados, mean+sd/4)
-```
-
-
-```{r}
-print (dados$confianca1, dados$confianca2)
-```
-
-
-```{r}
-dados <- within(dados, {
-  confianca1 <- NULL
-  confianca2<- NULL
-  mean <- NULL
-  sd <- NULL 
+Dataset <- within(Dataset, {
+  exposicao <- as.factor(exposicao)
 })
 ```
 
 
 ```{r}
-dados <- within(dados, {
-  confianca2 <- NULL 
+with(Dataset, tapply(cvfpred, exposicao, median, na.rm=TRUE))
+```
+
+
+```{r}
+kruskal.test(cvfpred ~ exposicao, data=Dataset)
+```
+
+
+```{r}
+library(mvtnorm, pos=14)
+```
+
+
+```{r}
+library(survival, pos=14)
+```
+
+
+```{r}
+library(MASS, pos=14)
+```
+
+
+```{r}
+library(TH.data, pos=14)
+```
+
+
+```{r}
+library(multcomp, pos=14)
+```
+
+
+```{r}
+library(abind, pos=19)
+```
+
+
+```{r}
+AnovaModel.1 <- aov(temtraba ~ exposicao, data=Dataset)
+```
+
+
+```{r}
+summary(AnovaModel.1)
+```
+
+
+```{r}
+with(Dataset, numSummary(temtraba, groups=exposicao, statistics=c("mean", "sd")))
+```
+
+
+```{r}
+with(Dataset, tapply(temtraba, exposicao, median, na.rm=TRUE))
+```
+
+
+```{r}
+kruskal.test(temtraba ~ exposicao, data=Dataset)
+```
+
+
+```{r}
+load("/home/mae5755.16/Downloads/aula11/PulsacaoUCLAD1.RData")
+```
+
+
+```{r}
+Dataset <- within(Dataset, {
+  exposicao <- as.factor(exposicao)
 })
 ```
 
+
 ```{r}
-dados2 <- as.data.frame(t(dados))
+with(Dataset, tapply(cvfpred, exposicao, median, na.rm=TRUE))
 ```
 
 
 ```{r}
-dados2 <- data.frame(t(dados))
-```
-
-```{r}
-library('graphics')
+kruskal.test(cvfpred ~ exposicao, data=Dataset)
 ```
 
 
 ```{r}
-dados2 <- data.frame(t(dados))
+library(mvtnorm, pos=14)
 ```
+
+
+```{r}
+library(survival, pos=14)
+```
+
+
+```{r}
+library(MASS, pos=14)
+```
+
+
+```{r}
+library(TH.data, pos=14)
+```
+
+
+```{r}
+library(multcomp, pos=14)
+```
+
+
+```{r}
+library(abind, pos=19)
+```
+
+
+```{r}
+AnovaModel.1 <- aov(temtraba ~ exposicao, data=Dataset)
+```
+
+
+```{r}
+with(Dataset, numSummary(temtraba, groups=exposicao, statistics=c("mean", "sd")))
+```
+
+
+```{r}
+with(Dataset, tapply(temtraba, exposicao, median, na.rm=TRUE))
+```
+
+
+```{r}
+kruskal.test(temtraba ~ exposicao, data=Dataset)
+```
+
+```{r}
+friedman.test (Pulsacao ~ Tempo | Ind, data = ColesterolUCLAD1)
+```
+
 
 
