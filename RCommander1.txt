@@ -1,0 +1,170 @@
+
+> load("/home/mae5755.16/Downloads/Tetrahymena.RData")
+
+> ComGlicose <- subset(Tetrahymena, subset=Glicose=='s')
+
+> ComGlicose <- subset(ComGlicose, subset=Glicose=='S')
+
+> ComGlicose <- subset(Tetrahymena, subset=Glicose=='S')
+
+> ComGlicose <- subset(Tetrahymena, subset=Glicose=='M')
+
+> SemGlicose <- subset(Tetrahymena, subset=Glicose=='M')
+
+> ComGlicose <- subset(Tetrahymena, subset=Glicose=='S')
+
+> with(ComGlicose, cor.test(Diametro, Log_concentracao, alternative="two.sided", method="pearson"))
+
+	Pearson's product-moment correlation
+
+data:  Diametro and Log_concentracao
+t = -19.983, df = 30, p-value < 2.2e-16
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.9826631 -0.9277193
+sample estimates:
+       cor 
+-0.9644298 
+
+
+> SemGlicose <- subset(Tetrahymena, subset=Glicose=='N')
+
+> with(ComGlicose, cor.test(Concentracao, Diametro, alternative="two.sided", method="spearman"))
+
+	Spearman's rank correlation rho
+
+data:  Concentracao and Diametro
+S = 10731, p-value < 2.2e-16
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+       rho 
+-0.9667896 
+
+
+> with(SemGlicose, cor.test(Concentracao, Diametro, alternative="two.sided", method="spearman"))
+
+	Spearman's rank correlation rho
+
+data:  Concentracao and Diametro
+S = 17816, p-value < 2.2e-16
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+       rho 
+-0.9494008 
+
+
+> with(SemGlicose, cor.test(Concentracao, Diametro, alternative="two.sided", method="pearson"))
+
+	Pearson's product-moment correlation
+
+data:  Concentracao and Diametro
+t = -10.518, df = 36, p-value = 1.583e-12
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.9300426 -0.7599584
+sample estimates:
+       cor 
+-0.8686152 
+
+
+> with(SemGlicose, cor.test(Concentracao, Log_concentracao, alternative="two.sided", method="spearman"))
+
+	Spearman's rank correlation rho
+
+data:  Concentracao and Log_concentracao
+S = 0, p-value < 2.2e-16
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+rho 
+  1 
+
+
+> RegModel.1 <- lm(Concentracao~Glicosecat2, data=SemGlicose)
+
+> summary(RegModel.1)
+
+Call:
+lm(formula = Concentracao ~ Glicosecat2, data = SemGlicose)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-135382 -121628  -76167   47799  481385 
+
+Coefficients: (1 not defined because of singularities)
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   146430      27948   5.239 6.72e-06 ***
+Glicosecat2       NA         NA      NA       NA    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 172300 on 37 degrees of freedom
+
+
+> RegModel.2 <- lm(Log_concentracao~Glicosecat2, data=SemGlicose)
+
+> summary(RegModel.2)
+
+Call:
+lm(formula = Log_concentracao ~ Glicosecat2, data = SemGlicose)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.90395 -1.09645 -0.05395  0.96105  2.13605 
+
+Coefficients: (1 not defined because of singularities)
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  11.2139     0.2006   55.91   <2e-16 ***
+Glicosecat2       NA         NA      NA       NA    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.236 on 37 degrees of freedom
+
+
+> RegModel.3 <- lm(Concentracao~Log_concentracao, data=Tetrahymena)
+
+> summary(RegModel.3)
+
+Call:
+lm(formula = Concentracao ~ Log_concentracao, data = Tetrahymena)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-95803 -76185 -16968  71820 199703 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)    
+(Intercept)      -1287082      89138  -14.44   <2e-16 ***
+Log_concentracao   128479       7869   16.33   <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 83250 on 68 degrees of freedom
+Multiple R-squared:  0.7968,	Adjusted R-squared:  0.7938 
+F-statistic: 266.6 on 1 and 68 DF,  p-value: < 2.2e-16
+
+
+> RegModel.4 <- lm(Concentracao~Glicosecat2+Log_concentracao, data=Tetrahymena)
+
+> summary(RegModel.4)
+
+Call:
+lm(formula = Concentracao ~ Glicosecat2 + Log_concentracao, data = Tetrahymena)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-104295  -69248  -15596   63421  207449 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)    
+(Intercept)      -1291690      89573 -14.421   <2e-16 ***
+Glicosecat2         15869      20043   0.792    0.431    
+Log_concentracao   128244       7896  16.242   <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 83480 on 67 degrees of freedom
+Multiple R-squared:  0.7987,	Adjusted R-squared:  0.7927 
+F-statistic: 132.9 on 2 and 67 DF,  p-value: < 2.2e-16
+
+

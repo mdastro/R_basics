@@ -1,0 +1,193 @@
+
+> load("/home/mae5755.16/Downloads/Ex1aula12.csv")
+
+> Dataset <- read.table("/home/mae5755.16/Downloads/Ex1aula12.csv", header=TRUE, sep=",", na.strings="NA", dec=".", 
++   strip.white=TRUE)
+
+> Dataset <- read.table("/home/mae5755.16/Downloads/Ex1aula12.csv", header=TRUE, sep=",", na.strings="NA", dec=",", 
++   strip.white=TRUE)
+
+> summary(Dataset)
+      Peso        Taxa     
+ 55     :2   Min.   :1034  
+ 103    :1   1st Qu.:1153  
+ 110,2  :1   Median :1248  
+ 122    :1   Mean   :1300  
+ 123,1  :1   3rd Qu.:1382  
+ 43,1   :1   Max.   :1777  
+ (Other):8                 
+
+> with(Dataset, Dotplot(Taxa, by=Peso, bin=FALSE))
+
+> with(Dataset, Dotplot(Taxa, by=Peso, bin=FALSE))
+
+> with(Dataset, Dotplot(Taxa, by=taxa, bin=FALSE))
+
+> with(Dataset, Dotplot(Taxa, by=Taxa, bin=FALSE))
+
+> editDataset(Dataset)
+
+> with(Dataset, Dotplot(Peso, by=Taxa, bin=FALSE))
+
+> Dataset <- read.table("/home/mae5755.16/Downloads/Ex1aula12.csv", header=TRUE, sep=",", na.strings="NA", dec=".", 
++   strip.white=TRUE)
+
+> RegModel.1 <- lm(Taxa~Peso, data=Dataset)
+
+> summary(RegModel.1)
+
+Call:
+lm(formula = Taxa ~ Peso, data = Dataset)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-172.877  -79.803    3.189   48.928  140.132 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 682.2456    81.1851   8.404  1.3e-06 ***
+Peso          7.8248     0.9806   7.979  2.3e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 94.77 on 13 degrees of freedom
+Multiple R-squared:  0.8304,	Adjusted R-squared:  0.8174 
+F-statistic: 63.67 on 1 and 13 DF,  p-value: 2.3e-06
+
+
+> summary(Dataset)
+      Peso             Taxa     
+ Min.   : 43.10   Min.   :1034  
+ 1st Qu.: 58.55   1st Qu.:1153  
+ Median : 72.80   Median :1248  
+ Mean   : 78.94   Mean   :1300  
+ 3rd Qu.: 96.15   3rd Qu.:1382  
+ Max.   :123.10   Max.   :1777  
+
+> with(Dataset, Dotplot(Peso, bin=FALSE))
+
+> with(Dataset, Dotplot(Taxa, bin=FALSE))
+
+> scatterplot(Taxa~Peso, reg.line=FALSE, smooth=FALSE, spread=FALSE, boxplots=FALSE, span=0.5, ellipse=FALSE, 
++   levels=c(.5, .9), data=Dataset)
+
+> RegModel.2 <- lm(Taxa~Peso, data=Dataset)
+
+> summary(RegModel.2)
+
+Call:
+lm(formula = Taxa ~ Peso, data = Dataset)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-172.877  -79.803    3.189   48.928  140.132 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 682.2456    81.1851   8.404  1.3e-06 ***
+Peso          7.8248     0.9806   7.979  2.3e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 94.77 on 13 degrees of freedom
+Multiple R-squared:  0.8304,	Adjusted R-squared:  0.8174 
+F-statistic: 63.67 on 1 and 13 DF,  p-value: 2.3e-06
+
+
+> stripchart(Dataset$Peso, method="stack", xlab="Peso")
+
+> scatterplot(Taxa~Peso, reg.line=FALSE, smooth=FALSE, spread=FALSE, boxplots=FALSE, span=0.5, ellipse=FALSE, 
++   levels=c(.5, .9), data=Dataset)
+
+> oldpar <- par(oma=c(0,0,3,0), mfrow=c(2,2))
+
+> plot(RegModel.2)
+
+> par(oldpar)
+
+> library(lattice, pos=14)
+
+> library(grid, pos=14)
+
+> library(colorspace, pos=14)
+
+> library(effects, pos=14)
+
+> with(Dataset, cor.test(Peso, Taxa, alternative="two.sided", method="pearson"))
+
+	Pearson's product-moment correlation
+
+data:  Peso and Taxa
+t = 7.9795, df = 13, p-value = 2.3e-06
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.7483864 0.9705021
+sample estimates:
+      cor 
+0.9112882 
+
+
+> with(Dataset, cor.test(Peso, Taxa, alternative="two.sided", method="spearman"))
+
+	Spearman's rank correlation rho
+
+data:  Peso and Taxa
+S = 69.686, p-value = 1.899e-05
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+0.8755599 
+
+
+> RegModel.3 <- lm(Taxa~Peso, data=Dataset)
+
+> summary(RegModel.3)
+
+Call:
+lm(formula = Taxa ~ Peso, data = Dataset)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-172.877  -79.803    3.189   48.928  140.132 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 682.2456    81.1851   8.404  1.3e-06 ***
+Peso          7.8248     0.9806   7.979  2.3e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 94.77 on 13 degrees of freedom
+Multiple R-squared:  0.8304,	Adjusted R-squared:  0.8174 
+F-statistic: 63.67 on 1 and 13 DF,  p-value: 2.3e-06
+
+
+> load("/home/mae5755.16/Downloads/Tetrahymena.RData")
+
+> scatterplot(Concentracao~Diametro, reg.line=FALSE, smooth=FALSE, spread=FALSE, boxplots=FALSE, span=0.5, ellipse=FALSE, 
++   levels=c(.5, .9), data=Tetrahymena)
+
+> scatterplot(Diametro~Concentracao, log="x", reg.line=FALSE, smooth=FALSE, spread=FALSE, boxplots=FALSE, span=0.5, 
++   ellipse=FALSE, levels=c(.5, .9), data=Tetrahymena)
+
+> scatterplot(Diametro~Concentracao, reg.line=FALSE, smooth=FALSE, spread=FALSE, boxplots=FALSE, span=0.5, ellipse=FALSE, 
++   levels=c(.5, .9), data=Tetrahymena)
+
+> scatterplot(Diametro~Concentracao | Glicose, reg.line=FALSE, smooth=FALSE, spread=FALSE, boxplots=FALSE, span=0.5, 
++   ellipse=FALSE, levels=c(.5, .9), by.groups=TRUE, data=Tetrahymena)
+
+> scatterplot(Diametro~Concentracao | Glicose, log="x", reg.line=FALSE, smooth=FALSE, spread=FALSE, boxplots=FALSE, 
++   span=0.5, ellipse=FALSE, levels=c(.5, .9), by.groups=TRUE, data=Tetrahymena)
+
+> dados1 <- subset(Tetrahymena, subset=Glicose=='s')
+
+> dados1 <- subset(Tetrahymena, subset=Glicose=='s'
+
+> dados1 <- subset(Tetrahymena, subset=Glicose=='s')
+
+> dados1 <- subset(Tetrahymena, subset=Glicose=='s')
+
+> dados1 <- subset(Tetrahymena, subset=Glicose=='s')
+
+> comglicose <- subset(Tetrahymena, subset=Glicose=='s')
+

@@ -1,0 +1,110 @@
+<!-- R Commander Markdown Template -->
+
+Replace with Main Title
+=======================
+
+### Your Name
+
+### `r as.character(Sys.Date())`
+
+```{r echo=FALSE}
+# include this code chunk as-is to set options
+knitr::opts_chunk$set(comment=NA, prompt=TRUE, out.width=750, fig.height=8, fig.width=8)
+library(Rcmdr)
+library(car)
+library(RcmdrMisc)
+```
+
+
+```{r echo=FALSE}
+# include this code chunk as-is to enable 3D graphs
+library(rgl)
+knitr::knit_hooks$set(webgl = hook_webgl)
+```
+
+
+```{r}
+load("/home/mae5755.16/Downloads/Tetrahymena.RData")
+```
+
+
+```{r}
+ComGlicose <- subset(Tetrahymena, subset=Glicose=='s')
+```
+
+
+
+
+
+
+ComGlicose <- subset(ComGlicose, subset=Glicose=='S')
+
+
+
+```{r}
+ComGlicose <- subset(Tetrahymena, subset=Glicose=='S')
+```
+
+
+
+
+```{r}
+ComGlicose <- subset(Tetrahymena, subset=Glicose=='M')
+```
+
+
+```{r}
+SemGlicose <- subset(Tetrahymena, subset=Glicose=='M')
+```
+
+```{r}
+ComGlicose <- subset(Tetrahymena, subset=Glicose=='S')
+```
+
+
+
+
+```{r}
+with(ComGlicose, cor.test(Diametro, Log_concentracao, alternative="two.sided", method="pearson"))
+```
+
+```{r}
+SemGlicose <- subset(Tetrahymena, subset=Glicose=='N')
+```
+
+```{r}
+with(ComGlicose, cor.test(Concentracao, Diametro, alternative="two.sided", method="spearman"))
+```
+
+```{r}
+with(SemGlicose, cor.test(Concentracao, Diametro, alternative="two.sided", method="spearman"))
+```
+
+```{r}
+with(SemGlicose, cor.test(Concentracao, Diametro, alternative="two.sided", method="pearson"))
+```
+
+```{r}
+with(SemGlicose, cor.test(Concentracao, Log_concentracao, alternative="two.sided", method="spearman"))
+```
+
+```{r}
+RegModel.1 <- lm(Concentracao~Glicosecat2, data=SemGlicose)
+summary(RegModel.1)
+```
+
+```{r}
+RegModel.2 <- lm(Log_concentracao~Glicosecat2, data=SemGlicose)
+summary(RegModel.2)
+```
+
+```{r}
+RegModel.3 <- lm(Concentracao~Log_concentracao, data=Tetrahymena)
+summary(RegModel.3)
+```
+
+```{r}
+RegModel.4 <- lm(Concentracao~Glicosecat2+Log_concentracao, data=Tetrahymena)
+summary(RegModel.4)
+```
+

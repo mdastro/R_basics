@@ -1,0 +1,199 @@
+<!-- R Commander Markdown Template -->
+
+Replace with Main Title
+=======================
+
+### Your Name
+
+### `r as.character(Sys.Date())`
+
+```{r echo=FALSE}
+# include this code chunk as-is to set options
+knitr::opts_chunk$set(comment=NA, prompt=TRUE, out.width=750, fig.height=8, fig.width=8)
+library(Rcmdr)
+library(car)
+library(RcmdrMisc)
+```
+
+
+```{r echo=FALSE}
+# include this code chunk as-is to enable 3D graphs
+library(rgl)
+knitr::knit_hooks$set(webgl = hook_webgl)
+```
+
+```{r}
+load("/tmp/RtmpeRuv4y/Dataset")
+```
+
+```{r}
+load("/home/mae5755.16/Downloads/Ex1aula12.csv")
+```
+
+```{r}
+Dataset <- read.table("/home/mae5755.16/Downloads/Ex1aula12.csv", header=TRUE, sep=",", na.strings="NA", dec=".", 
+  strip.white=TRUE)
+```
+
+```{r}
+Dataset <- read.table("/home/mae5755.16/Downloads/Ex1aula12.csv", header=TRUE, sep=",", na.strings="NA", dec=",", 
+  strip.white=TRUE)
+```
+
+```{r}
+summary(Dataset)
+```
+
+
+```{r}
+Dataset <- read.table("/home/mae5755.16/Downloads/Ex1aula12.csv", header=TRUE, sep=",", na.strings="NA", dec=".", 
+  strip.white=TRUE)
+```
+
+```{r}
+RegModel.1 <- lm(Taxa~Peso, data=Dataset)
+summary(RegModel.1)
+```
+
+```{r}
+summary(Dataset)
+```
+
+
+```{r}
+with(Dataset, Dotplot(Peso, bin=FALSE))
+```
+
+```{r}
+with(Dataset, Dotplot(Taxa, bin=FALSE))
+```
+
+```{r}
+scatterplot(Taxa~Peso, reg.line=FALSE, smooth=FALSE, spread=FALSE, boxplots=FALSE, span=0.5, ellipse=FALSE, 
+  levels=c(.5, .9), data=Dataset)
+```
+
+```{r}
+RegModel.2 <- lm(Taxa~Peso, data=Dataset)
+summary(RegModel.2)
+```
+
+```{r}
+stripchart(Dataset$Peso, method="stack", xlab="Peso")
+```
+
+```{r}
+scatterplot(Taxa~Peso, reg.line=FALSE, smooth=FALSE, spread=FALSE, boxplots=FALSE, span=0.5, ellipse=FALSE, 
+  levels=c(.5, .9), data=Dataset)
+```
+
+```{r}
+oldpar <- par(oma=c(0,0,3,0), mfrow=c(2,2))
+```
+
+
+```{r}
+plot(RegModel.2)
+```
+
+
+```{r}
+par(oldpar)
+```
+
+
+```{r}
+library(lattice, pos=14)
+```
+
+
+```{r}
+library(grid, pos=14)
+```
+
+
+```{r}
+library(colorspace, pos=14)
+```
+
+
+```{r}
+library(effects, pos=14)
+```
+
+
+```{r}
+with(Dataset, cor.test(Peso, Taxa, alternative="two.sided", method="pearson"))
+```
+
+```{r}
+with(Dataset, cor.test(Peso, Taxa, alternative="two.sided", method="spearman"))
+```
+
+```{r}
+RegModel.3 <- lm(Taxa~Peso, data=Dataset)
+summary(RegModel.3)
+```
+
+```{r}
+load("/home/mae5755.16/Downloads/Tetrahymena.RData")
+```
+
+
+```{r}
+scatterplot(Concentracao~Diametro, reg.line=FALSE, smooth=FALSE, spread=FALSE, boxplots=FALSE, span=0.5, ellipse=FALSE, 
+  levels=c(.5, .9), data=Tetrahymena)
+```
+
+```{r}
+scatterplot(Diametro~Concentracao, log="x", reg.line=FALSE, smooth=FALSE, spread=FALSE, boxplots=FALSE, span=0.5, 
+  ellipse=FALSE, levels=c(.5, .9), data=Tetrahymena)
+```
+
+```{r}
+scatterplot(Diametro~Concentracao, reg.line=FALSE, smooth=FALSE, spread=FALSE, boxplots=FALSE, span=0.5, ellipse=FALSE, 
+  levels=c(.5, .9), data=Tetrahymena)
+```
+
+```{r}
+scatterplot(Diametro~Concentracao | Glicose, reg.line=FALSE, smooth=FALSE, spread=FALSE, boxplots=FALSE, span=0.5, 
+  ellipse=FALSE, levels=c(.5, .9), by.groups=TRUE, data=Tetrahymena)
+```
+
+```{r}
+scatterplot(Diametro~Concentracao | Glicose, log="x", reg.line=FALSE, smooth=FALSE, spread=FALSE, boxplots=FALSE, 
+  span=0.5, ellipse=FALSE, levels=c(.5, .9), by.groups=TRUE, data=Tetrahymena)
+```
+
+```{r}
+dados1 <- subset(Tetrahymena, subset=Glicose=='s')
+```
+
+
+
+
+```{r}
+dados1 <- subset(Tetrahymena, subset=Glicose=='s')
+```
+
+
+```{r}
+dados1 <- subset(Tetrahymena, subset=Glicose=='s')
+```
+
+
+dados1 <- subset(Tetrahymena, subset=Glicose=='s')
+
+
+
+
+
+```{r}
+
+```
+
+
+```{r}
+comglicose <- subset(Tetrahymena, subset=Glicose=='s')
+```
+
